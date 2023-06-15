@@ -1,0 +1,43 @@
+.room-item-container {
+    inset: 0;
+    position: fixed;
+    background-color: var(--overlay-bg);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .room-item-wrapper {
+        width: 600px;
+        height: 80vh;
+        background-color: var(--bg-color);
+        box-shadow: var(--box-shadow);
+        color: var(--text-color);
+        border-radius: 4px;
+        header.room-item-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 10%;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+            font-size: large;
+            .header-text {
+                text-align: center;
+                flex: 1;
+            }
+            .close {
+                position: absolute;
+                cursor: pointer;
+                padding: 10px;
+                right: 0;
+                transition: transform 0.2s ease-in-out;
+                &:hover {
+                    color: var(--low-color);
+                }
+            }
+        }
+        .room-item-body {
+            height: 90%;
+        }
+    }
+}

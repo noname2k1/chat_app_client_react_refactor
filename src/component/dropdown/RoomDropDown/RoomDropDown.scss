@@ -1,0 +1,77 @@
+.background-table {
+    max-width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    height: 0;
+    visibility: hidden;
+    opacity: 0;
+    cursor: default;
+    transition: height 0.4s ease;
+    overflow-y: auto;
+    &.active {
+        height: 240px;
+        visibility: visible;
+        opacity: 1;
+    }
+    &::-webkit-scrollbar {
+        width: 0;
+    }
+    .color-outside {
+        cursor: pointer;
+        margin: 10px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: var(--text-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .color-inside {
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            background-color: var(--bg-color-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            &.yellow {
+                background-color: var(--yellow-color);
+            }
+            &.green {
+                background-color: var(--green-color);
+            }
+            &.red {
+                background-color: var(--red-color);
+            }
+            &.orange {
+                background-color: var(--orange-color);
+            }
+            &.purple {
+                background-color: var(--purple-color);
+            }
+            &.pink {
+                background-color: var(--pink-color);
+            }
+            &.teal {
+                background-color: var(--teal-color);
+            }
+            &.blue {
+                background-color: var(--blue-color);
+            }
+            &.gray {
+                background-color: var(--gray-color);
+            }
+            &.deep-blue {
+                background-color: var(--deep-blue-color);
+            }
+            &.middle-blue {
+                background-color: var(--middle-blue-color);
+            }
+            &:hover {
+                filter: brightness(0.8);
+            }
+        }
+    }
+}

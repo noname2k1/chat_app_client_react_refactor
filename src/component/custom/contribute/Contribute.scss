@@ -1,0 +1,69 @@
+.contribute-container {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    .contribute-wrapper {
+        position: absolute;
+        padding: 30px 40px;
+        background-color: var(--modal-bg);
+        border-radius: 10px;
+        z-index: 1;
+        max-width: 100vw;
+        color: var(--bg-color-secondary);
+        header {
+            text-align: center;
+            h1 {
+                color: inherit;
+            }
+        }
+        .contribute-form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            input,
+            textarea {
+                padding: 10px;
+                margin-bottom: 4px;
+                caret-color: var(--outline-input-color);
+            }
+            textarea {
+                height: 100px;
+            }
+            .error {
+                color: var(--error-color);
+            }
+            .success {
+                color: var(--success-color);
+            }
+            button {
+                font-weight: bold;
+                width: fit-content;
+                margin: 0 auto;
+                font-size: 2rem;
+                margin-top: 10px;
+            }
+        }
+    }
+    .contribute-overlay {
+        cursor: pointer;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+// [
+// [3]   {
+// [3]     fieldname: 'files',
+// [3]     originalname: 'laravel.txt',
+// [3]     encoding: '7bit',
+// [3]     mimetype: 'text/plain',
+// [3]     destination: 'public/uploads/',
+// [3]     filename: 'text-1666088058290.txt',[3]
+//   path: 'public\\uploads\\text-1666088058290.txt',
+// [3]     size: 612
+// [3]   }
+// [3] ]

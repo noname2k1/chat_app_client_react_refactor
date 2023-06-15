@@ -1,0 +1,66 @@
+$modal-width: 600px;
+.modal-container {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    background-color: var(--overlay-bg);
+    z-index: 10000;
+    .modal-wrapper {
+        background-color: var(--bg-color);
+        width: $modal-width;
+        color: var(--text-color);
+        border-radius: 4px;
+        .modal-header {
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border-color);
+            .modal-title {
+                font-size: 3rem;
+                font-weight: 700;
+            }
+        }
+        .modal-body {
+            width: 100%;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            cursor: default;
+            min-height: 50vh;
+        }
+        .modal-footer {
+            display: flex;
+            align-items: center;
+            .modal-footer-item {
+                flex: 1;
+                text-align: center;
+                padding: 20px;
+                cursor: pointer;
+                &.active {
+                    background-color: var(--text-color);
+                    color: var(--bg-color);
+                    &:hover {
+                        background-color: var(--text-color);
+                        color: var(--bg-color);
+                        cursor: default;
+                    }
+                }
+                &:hover {
+                    background-color: var(--active-hover-color);
+                }
+                &:first-child {
+                    border-bottom-left-radius: 4px;
+                }
+                &:last-child {
+                    border-bottom-right-radius: 4px;
+                }
+            }
+        }
+    }
+}

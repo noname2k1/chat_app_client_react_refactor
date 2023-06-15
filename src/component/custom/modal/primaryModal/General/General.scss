@@ -1,0 +1,26 @@
+.account-modal-body {
+    display: flex;
+    flex-direction: column;
+    .loading {
+        text-align: center;
+    }
+    .account-modal-body-item {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        margin-bottom: 4px;
+        .account-status {
+            background-color: var(--success-color);
+            border-radius: 4px;
+            &.non-active {
+                background-color: var(--error-color);
+            }
+        }
+        .active-now {
+            cursor: pointer;
+            &:hover {
+                color: var(--low-color);
+            }
+        }
+    }
+}

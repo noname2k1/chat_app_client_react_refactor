@@ -1,0 +1,243 @@
+$button-width: 50px;
+$button-height: 30px;
+.replying-wrapper {
+    background-color: var(--lower-color);
+    .replying-header {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        .close {
+            display: flex;
+            align-items: center;
+            background-color: var(--active-link-color);
+            border-radius: 50%;
+            justify-content: center;
+            margin-left: auto;
+            cursor: pointer;
+            &:hover {
+                background-color: var(--active-hover-color);
+            }
+        }
+    }
+    .replied-message {
+        padding: 0 10px 10px 10px;
+    }
+}
+.content-form {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-top: auto;
+    border-top: 1px solid var(--border-color);
+    .file-list {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        width: 100%;
+        bottom: 100%;
+        left: 0;
+        background-color: transparent;
+        color: var(--text-color);
+        padding: 10px;
+        gap: 10px;
+        .file-item {
+            width: fit-content;
+            height: 100px;
+            position: relative;
+            padding: 4px;
+            box-shadow: var(--box-shadow);
+            span.remove-preview {
+                position: absolute;
+                top: 0;
+                right: 0;
+                background-color: #000;
+                color: #fff;
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+                transform: scale(1.2);
+                &:hover {
+                    transform: scale(1.6);
+                    border-radius: 50%;
+                }
+            }
+        }
+    }
+    textarea.message-text {
+        width: calc(100% - $button-width);
+        resize: none;
+        padding: 1rem;
+        border-radius: 10px;
+        margin: 10px 0;
+        caret-color: var(--input-caret-color);
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+    button {
+        width: $button-width;
+        height: $button-height;
+        position: relative;
+        // z-index: 10000;
+        &.attach-btn {
+            &:hover {
+                color: var(--text-color);
+            }
+            width: fit-content;
+            margin: 0 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .central-btn {
+                &:hover {
+                    color: var(--low-color);
+                }
+            }
+            .attach-selection-item {
+                border: 1px solid var(--border-color);
+                border-radius: 50%;
+                background-color: var(--text-color);
+                padding: 4px 6px;
+                position: absolute;
+                bottom: 0;
+                color: var(--bg-color);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                &:hover {
+                    background-color: var(--bg-color);
+                    color: var(--text-color);
+                }
+                &:nth-child(2),
+                &:last-child {
+                    bottom: -12px;
+                }
+                $imageDistance: 105%;
+                $videoDistance: calc($imageDistance + 120%);
+                $fileDistance: calc($videoDistance + 120%);
+                $audioDistance: calc($fileDistance + 120%);
+                &.image {
+                    bottom: 105%;
+                }
+                &.video {
+                    inset: unset;
+                    bottom: $videoDistance;
+                }
+                &.file {
+                    inset: unset;
+                    bottom: $fileDistance;
+                }
+                &.audio {
+                    inset: unset;
+                    bottom: $audioDistance;
+                }
+            }
+        }
+    }
+    input[name='--file--'] {
+        display: none;
+    }
+    //others typing
+    .other-user-typing {
+        $height: 30px;
+        display: flex;
+        align-items: center;
+        position: absolute;
+        bottom: 100%;
+        left: 0;
+        background-color: var(--bg-color-secondary);
+        color: var(--text-color);
+        padding: 10px 0 0;
+        .other-user-typing-avatar {
+            width: $height;
+            height: $height;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 10px;
+        }
+        .other-user-typing-text {
+            height: $height;
+            display: flex;
+            align-items: center;
+            .dot-pulse {
+                position: relative;
+                left: -9999px;
+                width: 10px;
+                height: 10px;
+                border-radius: 5px;
+                background-color: var(--text-color);
+                color: var(--text-color);
+                box-shadow: 9999px 0 0 -5px var(--text-color);
+                animation: dotPulse 1.5s infinite linear;
+                animation-delay: 0.25s;
+                margin-left: 25px;
+            }
+
+            .dot-pulse::before,
+            .dot-pulse::after {
+                content: '';
+                display: inline-block;
+                position: absolute;
+                top: 0;
+                width: 10px;
+                height: 10px;
+                border-radius: 5px;
+                background-color: var(--text-color);
+                color: var(--text-color);
+            }
+
+            .dot-pulse::before {
+                box-shadow: 9984px 0 0 -5px var(--text-color);
+                animation: dotPulseBefore 1.5s infinite linear;
+                animation-delay: 0s;
+            }
+
+            .dot-pulse::after {
+                box-shadow: 10014px 0 0 -5px var(--text-color);
+                animation: dotPulseAfter 1.5s infinite linear;
+                animation-delay: 0.5s;
+            }
+
+            @keyframes dotPulseBefore {
+                0% {
+                    box-shadow: 9984px 0 0 -5px var(--text-color);
+                }
+                30% {
+                    box-shadow: 9984px 0 0 2px var(--text-color);
+                }
+                60%,
+                100% {
+                    box-shadow: 9984px 0 0 -5px var(--text-color);
+                }
+            }
+
+            @keyframes dotPulse {
+                0% {
+                    box-shadow: 9999px 0 0 -5px var(--text-color);
+                }
+                30% {
+                    box-shadow: 9999px 0 0 2px var(--text-color);
+                }
+                60%,
+                100% {
+                    box-shadow: 9999px 0 0 -5px var(--text-color);
+                }
+            }
+
+            @keyframes dotPulseAfter {
+                0% {
+                    box-shadow: 10014px 0 0 -5px var(--text-color);
+                }
+                30% {
+                    box-shadow: 10014px 0 0 2px var(--text-color);
+                }
+                60%,
+                100% {
+                    box-shadow: 10014px 0 0 -5px var(--text-color);
+                }
+            }
+        }
+    }
+}

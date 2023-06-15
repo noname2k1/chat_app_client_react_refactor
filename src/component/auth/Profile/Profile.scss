@@ -1,0 +1,196 @@
+$profileHeaderHeight: 150px;
+$profileBodyHeight: fit-content;
+.profile-container {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  height: 100vh;
+  position: relative;
+  @media screen and (max-width: 768px) {
+    margin-left: var(--mobile-dashboard-width);
+  }
+  //Header
+  .profile-header {
+    margin-top: auto;
+    height: $profileHeaderHeight;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+    .profile-avatar-wrapper {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 150px;
+      width: 150px;
+      .zoom {
+        position: absolute;
+        right: 8px;
+        bottom: 8px;
+        cursor: pointer;
+        &:hover {
+          color: var(--low-color);
+        }
+      }
+      img {
+        border-radius: 50%;
+        border: 10px solid var(--bg-color-secondary);
+        box-shadow: var(--box-shadow);
+        cursor: pointer;
+        &:hover {
+          & ~ .avatar-edit {
+            display: flex;
+          }
+        }
+      }
+      .avatar-edit {
+        position: absolute;
+        display: flex;
+        margin: auto;
+        display: none;
+        cursor: pointer;
+        &:hover {
+          display: flex;
+        }
+      }
+      input.choose-avatar {
+        position: absolute;
+        width: 0;
+        height: 0;
+        visibility: hidden;
+      }
+      &.zoom-out {
+        position: fixed;
+        z-index: 1;
+        display: flex;
+        margin: 0 auto;
+        background-color: var(--bg-color);
+        width: auto;
+        height: 100vh;
+        top: 0;
+        img {
+          border: 80px solid var(--bg-color-secondary);
+          box-shadow: unset;
+          cursor: pointer;
+          //   height: 100vh;
+          border: unset;
+          border-radius: unset;
+        }
+      }
+    }
+    .profile-avatar-preview {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: $profileHeaderHeight;
+      .zoom {
+        position: absolute;
+        right: 8px;
+        bottom: 8px;
+        cursor: pointer;
+        &:hover {
+          color: var(--low-color);
+        }
+      }
+      img {
+        border-radius: 50%;
+        border-radius: 50%;
+        border: 10px solid var(--bg-color-secondary);
+        box-shadow: var(--box-shadow);
+      }
+      &.zoom-out {
+        position: fixed;
+        z-index: 1;
+        display: flex;
+        margin: 0 auto;
+        background-color: var(--bg-color);
+        inset: 0;
+        width: auto;
+        img {
+          border: 80px solid var(--bg-color-secondary);
+          box-shadow: unset;
+          cursor: pointer;
+          height: 100vh;
+          border: unset;
+          border-radius: unset;
+        }
+      }
+    }
+  }
+  //Body
+  .profile-body {
+    height: $profileBodyHeight;
+    position: relative;
+    .profile-body-details {
+      transform: translateX(0);
+      visibility: visible;
+      transition: all 0.2s ease-in-out;
+    }
+    &.form {
+      .profile-body-form {
+        transform: translateX(0);
+        visibility: visible;
+      }
+      .profile-body-details {
+        transform: translateX(100%);
+        visibility: hidden;
+      }
+    }
+    .profile-body-details {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .profile-body-item {
+        font-size: 3rem;
+        display: flex;
+        align-items: center;
+        &.profile-name {
+          font-size: 4rem;
+          font-weight: 600;
+          margin: 10px;
+        }
+      }
+    }
+    .profile-body-form {
+      transform: translateX(100%);
+      visibility: hidden;
+      transition: all 0.4s ease-in-out;
+      .profile-body-item {
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        margin: 0 auto;
+        margin-top: 10px;
+        input,
+        select {
+          padding: 4px 10px;
+          outline: none;
+          border: 1px solid var(--border-color);
+        }
+      }
+    }
+  }
+  //Footer
+  .profile-footer {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex: 1;
+    .profile-footer-item {
+      height: fit-content;
+      font-size: 2.5rem;
+      font-weight: 600;
+      cursor: pointer;
+      &:hover {
+        color: var(--low-color);
+      }
+    }
+  }
+}

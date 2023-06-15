@@ -1,0 +1,83 @@
+.wrapper-mbao {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wrapper-mbao .mobile-accounts-online-wrapper {
+  position: absolute;
+  background-color: var(--bg-color-secondary);
+  width: 432px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  z-index: 10001;
+}
+.wrapper-mbao .mobile-accounts-online-wrapper header {
+  text-align: center;
+  padding: 10px;
+  height: 50px;
+  border-bottom: 1px solid var(--border-color);
+}
+.wrapper-mbao .mobile-accounts-online-wrapper header h3 {
+  color: var(--text-color);
+  margin-bottom: 0;
+}
+.wrapper-mbao .mobile-accounts-online-wrapper ul {
+  margin-top: 4px;
+  margin-bottom: 4px;
+  display: flex;
+  list-style: none;
+  overflow-y: auto;
+  overflow-x: hidden;
+  flex-wrap: wrap;
+  gap: 4px;
+  justify-content: flex-start;
+  max-width: 100%;
+  max-height: calc(100% - 50px);
+  /* Track */
+  /* Handle */
+}
+.wrapper-mbao .mobile-accounts-online-wrapper ul::-webkit-scrollbar {
+  width: 4px;
+}
+.wrapper-mbao .mobile-accounts-online-wrapper ul::-webkit-scrollbar-track {
+  background: var(--bg-color-secondary);
+}
+.wrapper-mbao .mobile-accounts-online-wrapper ul::-webkit-scrollbar-thumb {
+  background: var(--text-color);
+}
+.wrapper-mbao .mobile-accounts-online-wrapper ul::-webkit-scrollbar-thumb:hover {
+  background: var(--overlay-bg);
+}
+.wrapper-mbao .mobile-accounts-online-wrapper ul li {
+  width: 60px;
+  height: 80px;
+  padding: 10px;
+  margin: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wrapper-mbao .mobile-accounts-online-wrapper ul li .account-online-item__avatar {
+  width: 40px;
+  height: 40px;
+}
+.wrapper-mbao .mobile-accounts-online-wrapper ul li .account-online-item--name {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+.wrapper-mbao .mobile-accounts-online-wrapper ul li h4 {
+  color: var(--text-color);
+}
+.wrapper-mbao .mobile-accounts-online-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: var(--overlay-bg);
+  z-index: 10000;
+}/*# sourceMappingURL=MobileAccountsOnline.css.map */

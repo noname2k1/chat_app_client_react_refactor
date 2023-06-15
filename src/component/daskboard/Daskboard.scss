@@ -1,0 +1,277 @@
+//private-primary css
+.account-avatar {
+    $account-avatar-size: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: $account-avatar-size;
+    max-height: $account-avatar-size;
+    min-width: $account-avatar-size;
+    max-width: $account-avatar-size;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+// Daskboard
+.daskboard {
+    position: relative;
+    width: var(--daskboard-width);
+    border-right: 1px solid var(--border-color);
+    height: 100vh;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    .mobile-search__button {
+        display: none;
+    }
+
+    // Daskboard header
+    .daskboard-header {
+        height: var(--header-height);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 10px;
+        .my-user-container {
+            display: flex;
+            cursor: pointer;
+            align-items: center;
+            $account-avatar-size: 50px;
+            // position: relative;
+            .account-avatar {
+                min-height: $account-avatar-size;
+                max-height: $account-avatar-size;
+                min-width: $account-avatar-size;
+                max-width: $account-avatar-size;
+                box-shadow: var(--box-shadow);
+            }
+            .my-user-text {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                .my-user-name {
+                    margin-left: 10px;
+                    margin-bottom: 10px;
+                    max-width: calc(var(--daskboard-width) / 2);
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    font-size: 2rem;
+                    font-weight: 700;
+                    text-align: center;
+                }
+                .my-user-profileid {
+                    margin-left: 10px;
+                    font-size: 1.2rem;
+                    font-weight: 600;
+                    margin-left: unset;
+                }
+            }
+        }
+        .my-user-feature {
+            max-width: 60px;
+            display: flex;
+            flex-direction: column;
+            .top {
+                display: flex;
+                align-items: center;
+            }
+            .bottom {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+        @media screen and (max-width: 768px) {
+            .my-user-container {
+                .my-user-text {
+                    display: none;
+                }
+            }
+            .my-user-feature {
+                display: none;
+            }
+        }
+    }
+    //Online account LIST
+    .mobile-accounts-online {
+        display: none;
+    }
+    .online-accounts {
+        height: var(--online-accounts-height);
+        display: flex;
+        padding: 1rem 0;
+        overflow-x: auto;
+        &::-webkit-scrollbar {
+            height: 6px;
+        }
+        &::-webkit-scrollbar-track {
+            background: #fff;
+        }
+        &::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 4px;
+            &:hover {
+                background-color: #8a8a8c;
+            }
+        }
+        .online-account {
+            height: 100%;
+            max-width: 75px;
+            min-width: 75px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            .account-name {
+                display: -webkit-box;
+                flex: 1;
+                height: calc(100% - 75px);
+                text-align: center;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                font-size: 1.3rem;
+                font-weight: 500;
+            }
+        }
+    }
+    //room LIST
+    .room-list {
+        display: flex;
+        flex-direction: column;
+        list-style: none;
+        overflow-y: auto;
+        max-height: calc(
+            100vh - var(--header-height) - var(--online-accounts-height) -
+                var(--search-bar-height) - 10px
+        );
+        @media (max-width: 768px) {
+            .account-avatar {
+                border: 1px solid var(--is-view-color);
+                &.viewed {
+                    border: 1px solid transparent;
+                }
+            }
+        }
+        &::-webkit-scrollbar {
+            width: 6px;
+        }
+        &::-webkit-scrollbar-track {
+            background: var(--active-link-color);
+        }
+        &::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 4px;
+            &:hover {
+                background-color: #8a8a8c;
+            }
+        }
+        .no-room {
+            text-align: center;
+        }
+        .room-item {
+            &:hover {
+                background-color: var(--active-hover-color);
+            }
+            a {
+                &.not-seen {
+                    font-weight: bold;
+                    .room-text {
+                        .room-name {
+                            font-size: 1.8rem;
+                        }
+                        .lastest-message {
+                            color: var(--text-color);
+                        }
+                    }
+                    .is-view {
+                        color: #00cbff;
+                    }
+                }
+                color: var(--text-color);
+                padding: 10px;
+                display: flex;
+                @media screen and (max-width: 768px) {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+                &.active {
+                    background-color: var(--active-link-color);
+                    text-decoration: none;
+                    color: var(--text-color);
+                }
+                .room-text {
+                    margin-left: 10px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    line-height: 1.6;
+                    overflow: hidden;
+                    @media screen and (max-width: 768px) {
+                        display: none;
+                    }
+                    .room-name {
+                        font-weight: bold;
+                        font-size: 1.7rem;
+                        width: 100%;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+                    .lastest-message {
+                        font-size: 1.4rem;
+                        color: var(--low-color);
+                        width: 100%;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+                }
+                .is-view {
+                    display: flex;
+                    align-items: center;
+                    margin-left: auto;
+                    font-size: 1.8rem;
+                    @media screen and (max-width: 768px) {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .daskboard {
+        position: fixed;
+        width: var(--mobile-dashboard-width);
+        z-index: 10000;
+        &.z-index-unset {
+            z-index: unset;
+        }
+        .daskboard-header {
+            justify-content: center;
+        }
+        .mobile-search__button,
+        .mobile-accounts-online {
+            display: flex;
+            justify-content: center;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        .search-bar-wrapper {
+            display: none;
+        }
+        .online-accounts {
+            display: none;
+        }
+        .users-online-count {
+            display: none;
+        }
+        .online-accounts {
+            display: none;
+        }
+    }
+}

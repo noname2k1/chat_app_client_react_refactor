@@ -1,0 +1,32 @@
+.coming-soon-container {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    .coming-soon-wrapper {
+        position: absolute;
+        box-shadow: var(--box-shadow);
+        padding: 30px 40px;
+        padding-right: 50px;
+        background-image: linear-gradient(
+            to right,
+            var(--blue-color),
+            var(--bg-color-secondary)
+        );
+        border-radius: 10px;
+        z-index: 1;
+        h1,
+        p {
+            color: var(--text-color) !important;
+        }
+    }
+    .coming-soon-overlay {
+        cursor: pointer;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        color: inherit;
+    }
+}

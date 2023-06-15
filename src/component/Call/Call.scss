@@ -1,0 +1,58 @@
+.call-container {
+    #mydiv {
+        position: absolute;
+        z-index: 10000;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        border: 1px solid #d3d3d3;
+        text-align: center;
+        border-radius: 4px;
+        #mydivheader {
+            padding: 10px;
+            cursor: move;
+            z-index: 10;
+            background-color: #2196f3;
+            color: #fff;
+            border-radius: 4px 4px 0 0;
+        }
+        .video {
+            cursor: pointer;
+            &#other-video {
+            }
+        }
+        .video-controls {
+            visibility: hidden;
+            opacity: 0;
+            height: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            border-radius: 0 0 4px 4px;
+            transition: height 0.3s ease 0.2s, opacity 0.3s ease 0.1s,
+                visibility 0.3s ease 0.4s;
+            &.show {
+                visibility: visible;
+                opacity: 1;
+                height: 50px;
+                padding: 10px;
+            }
+            .video-controls-item {
+                display: flex;
+                align-items: center;
+                padding: 10px;
+                cursor: pointer;
+                border-radius: 50%;
+                &.x-phone {
+                    background-color: var(--error-color);
+                    &:hover {
+                        background-color: var(--error-color);
+                        filter: brightness(0.8);
+                    }
+                }
+                &:hover {
+                    background-color: var(--lower-color);
+                }
+            }
+        }
+    }
+}

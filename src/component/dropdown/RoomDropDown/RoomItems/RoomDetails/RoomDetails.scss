@@ -1,0 +1,21 @@
+.room-details-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .avatar {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        margin: 0 auto;
+        display: block;
+        margin: 20px 0;
+        img {
+            box-shadow: var(--box-shadow);
+        }
+    }
+    .room-infor {
+        font-size: 2rem;
+    }
+}

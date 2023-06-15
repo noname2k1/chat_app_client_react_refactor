@@ -1,0 +1,13 @@
+.message-attachment,
+.item {
+    position: relative;
+    .play-icon {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        background-color: var(--video-overlay);
+    }
+}

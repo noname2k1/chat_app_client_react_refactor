@@ -1,0 +1,46 @@
+{
+  "name": "appchat_client",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.8.3",
+    "antd": "^4.0.0",
+    "axios": "^0.27.2",
+    "clsx": "^1.2.1",
+    "file-saver": "^2.0.5",
+    "moment": "^2.29.4",
+    "normalize.css": "^8.0.1",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
+    "react-icons": "^4.4.0",
+    "react-image-lightbox": "^5.1.4",
+    "react-redux": "^8.0.2",
+    "react-router-dom": "^6.3.0",
+    "redux": "^4.2.0",
+    "redux-persist": "^6.0.0",
+    "simple-peer": "^9.11.1",
+    "socket.io-client": "^4.5.1",
+    "styled-components": "^5.3.6",
+    "typewriter-effect": "^2.19.0",
+    "uuid": "^9.0.0",
+    "yet-another-react-lightbox": "^3.11.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.37",
+    "@types/react-dom": "^18.0.11",
+    "@vitejs/plugin-react": "^4.0.0",
+    "eslint": "^8.38.0",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.3.4",
+    "sass": "^1.53.0",
+    "vite": "^4.3.9"
+  }
+}

@@ -1,0 +1,40 @@
+.change-mode-checkbox-wrapper {
+    width: 30px;
+    height: 10px;
+    border: 1px solid var(--text-color);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgb(2, 0, 36);
+    background: linear-gradient(
+        90deg,
+        rgba(2, 0, 36, 1) 0%,
+        rgba(0, 0, 0, 1) 30%,
+        rgba(255, 228, 0, 1) 100%
+    );
+    border-radius: 4px;
+    label {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: var(--text-color);
+        color: var(--mode-icon-bg);
+        position: absolute;
+        // top: -10px;
+        left: -15px;
+        transition: all 0.3s ease-in-out;
+        cursor: pointer;
+    }
+    input {
+        display: none;
+        &:checked + label {
+            background-color: var(--mode-icon-bg);
+            color: var(--text-color);
+            left: 13px;
+        }
+    }
+}

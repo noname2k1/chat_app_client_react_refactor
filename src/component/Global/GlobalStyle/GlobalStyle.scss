@@ -1,0 +1,151 @@
+@import 'normalize.css';
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+:root {
+    //primary variables
+    --header-height: 80px;
+    --daskboard-width: 300px;
+    --search-bar-height: 30px;
+    --mobile-dashboard-width: 60px;
+    --online-accounts-height: 115px;
+    --view-media-file-link-width: 300px;
+    --outline-input-color: #03a9f4;
+    --is-view-color: #00cbff;
+    --tab-no-active-bg: #03a9f4;
+    --tab-no-active-color: #fff;
+    --border-color: #c5c7ca;
+    --error-color: #f44336;
+    --success-color: #00ff0a;
+    --warning-color: #ff9800;
+    --online-bg: #30c811;
+    --offline-bg: #959595;
+    --input-color: #000;
+    --overlay-bg: rgba(0, 0, 0, 0.5);
+    --dropdown-hover-bg: #c5c7ca4f;
+    --disabled-color: #c5c7ca;
+    --disabled-bg: #a5a5a5d9;
+    --overlay-bg: #000000ab;
+    --placeholder-color: #00000080;
+    --video-overlay: #ffffff36;
+    --reply-message-bg: #1100fd5e;
+    --modal-bg: #676767;
+    //lightmode colors
+    --blur-color: #1e1e1e6e;
+    --active-link-color: #c5c7ca8a;
+    --active-hover-color: #c5c7ca;
+    --bg-color: #f5f5f5;
+    --bg-color-secondary: #fff;
+    --low-color: #05050585;
+    --lower-color: #05050529;
+    --dropdown-bg: #ebebeb;
+    --reply-bg: #f5f5f5a5;
+    --box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 4px 11px rgba(0, 0, 0, 0.43);
+    --text-color: #1e1e1e;
+    --text-color-secondary: #f1f2f3;
+    --loading-bg: #000;
+    --mode-icon-bg: rgb(255, 200, 0);
+    --other-message-bg: #0000002e;
+    --my-message-bg: #593cff;
+    --message-hidden-color: #8f8f8f;
+    //color
+    --yellow-color: #fde047;
+    --green-color: #badc58;
+    --red-color: #ff5252;
+    --blue-color: #00b0ff;
+    --orange-color: #ffab00;
+    --purple-color: #b388ff;
+    --pink-color: #ff80ab;
+    --teal-color: #26a69a;
+    --gray-color: #bdbdbd;
+    --deep-blue-color: #3b82f6;
+    --middle-blue-color: #7ed6df;
+}
+[data-theme='dark'] {
+    //darkmode colors
+    --blur-color: #ffffff7d;
+    --bg-color: #191919;
+    --bg-color-secondary: #272727;
+    --active-link-color: #c5c7ca38;
+    --active-hover-color: #c5c7ca8c;
+    --low-color: #ffffff85;
+    --lower-color: #ffffff4a;
+    --dropdown-bg: #212121;
+    --reply-bg: #f5f5f556;
+    --loading-bg: #fff;
+    --box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1),
+        0 4px 11px rgba(255, 255, 255, 0.43);
+    --text-color: #f1f2f3;
+    --text-color-secondary: #1e1e1e;
+    --input-placeholder-color: #000;
+    --input-caret-color: #000;
+    // --my-message-bg: #0000007a;
+    // dark-color
+    --yellow-color: #a16207;
+    --green-color: #6ab04c;
+    --red-color: #eb4d4b;
+    --orange-color: #f0932b;
+    --purple-color: #be2edd;
+    --pink-color: #ff80ab;
+    --teal-color: #26a69a;
+    --blue-color: #4834d4;
+    --gray-color: #535c68;
+    --deep-blue-color: #130f40;
+    --middle-blue-color: #22a6b3;
+}
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+html {
+    font-size: 62.5%;
+    user-select: none;
+}
+input,
+input[type='email'],
+textarea {
+    color: #000;
+    &::placeholder {
+        color: var(--input-placeholder-color);
+    }
+    caret-color: var(--input-caret-color);
+    border: 1px solid var(--border-color);
+    background-color: #fff;
+    outline: none;
+}
+select {
+    color: var(--input-caret-color);
+}
+body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 1.6rem;
+    line-height: 1.2;
+    text-rendering: optimizeSpeed;
+    overflow: hidden;
+}
+
+button {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    &:hover,
+    &:active,
+    &.active {
+        color: var(--low-color);
+    }
+    border: none;
+    background: none;
+    &.disabled {
+        cursor: not-allowed !important;
+        color: var(--lower-color) !important;
+        user-select: none !important;
+    }
+    a {
+        text-decoration: none;
+        color: inherit;
+        &:hover {
+            color: var(--low-color);
+        }
+    }
+}
+
+//dropdown css: z-index: 999, overlay: z-index: 998
