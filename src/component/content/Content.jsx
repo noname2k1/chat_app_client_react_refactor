@@ -90,7 +90,6 @@ const Content = () => {
             };
             getOtherProfileByRoomID();
         } else {
-            
         }
         //eslint-disable-next-line
     }, [roomid]);
@@ -190,14 +189,17 @@ const Content = () => {
                 });
             }
         });
-        socket.on('notification-leave-room', (roomName, profileName) => {
+        socket.on('notification-leave-room', (room, profileName) => {
             setNotification({
                 enabled: true,
-                content: `[ ${profileName} ] ${currentLanguage.leaveRoom} [ ${roomName} ]`,
+                content: `[ ${profileName} ] ${currentLanguage.leaveRoom} [ ${room.name} ]`,
             });
+            if (room._id === currentRoom._id) {
+                console.log('leave-room');
+                dispatch(componentSlice.actions.setCurrentRoom(room));
+            }
         });
-        // eslint-disable-next-line
-    }, [profile._id]);
+    }, [profile._id, currentRoom]);
 
     //call
     const handleCallAudio = (e) => {
@@ -373,7 +375,7 @@ const Content = () => {
                     <MessageDropDown />
                 </div>
                 {JSON.stringify(currentRoom) !== '{}' &&
-                    currentRoom.request.length > 0 && (
+                    currentRoom?.request?.length > 0 && (
                         <div
                             className={clsx('requests-table', {
                                 shrink: !requestsTableExpand,

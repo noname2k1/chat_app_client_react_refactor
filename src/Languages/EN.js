@@ -74,6 +74,11 @@ const EN = {
     tooltipAddImage: 'Add Image',
     tooltipAddVideo: 'Add Video',
     tooltipAddAudio: 'Add Audio',
+    tooltipAddMember: 'Add Member',
+
+    //placeholders
+    addMemberPlaceholder: 'Enter @+ID/name of member you want to add here',
+
     //Room
     noRoom: `You don't have any chat room`,
     newMessage: 'New Message',
@@ -89,6 +94,8 @@ const EN = {
     noRequest: 'No Request',
     blockedNotify: 'You have been blocked by ',
     blockerNotify: 'You have blocked ',
+    added: 'added',
+    outed: 'outed',
     //dropdown
     myAccount: 'My Account',
     darkmode: 'Dark Mode',

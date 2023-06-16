@@ -35,6 +35,7 @@ const Daskboard = () => {
     const {
         selectedRoomid,
         currentRoom,
+        currentMessages,
         searchInConversation,
         mobileAccountsOnline,
     } = useComponentSelector();
@@ -130,10 +131,12 @@ const Daskboard = () => {
 
     React.useEffect(() => {
         if (
-            (!roomid && !profileid && rooms.length > 0) ||
-            !currentRoom.member?.find((mem) => mem._id === profile._id)
+            ((!roomid && !profileid) ||
+                !currentRoom.member?.find((mem) => mem._id === profile._id)) &&
+            rooms.length > 0 &&
+            rooms[0]._id
         ) {
-            navigate(`/rooms/room/${rooms[0]?._id}`);
+            navigate(`/rooms/room/${rooms[0]._id}`);
         }
     }, [roomid, rooms, profileid]);
 
@@ -141,6 +144,11 @@ const Daskboard = () => {
     React.useEffect(() => {
         socket.on('connect', () => {
             socket.emit('join', rooms);
+        });
+        socket.on('add-new-member', ({ receiverid, room_id, message }) => {
+            if (profile._id === receiverid) {
+                loadRooms();
+            }
         });
         socket.on('update-my-rooms', (profileid) => {
             if (profile._id === profileid) {

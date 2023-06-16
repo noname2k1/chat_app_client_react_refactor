@@ -235,7 +235,7 @@ $message-width: calc(100% / 2);
         position: fixed;
         left: var(--daskboard-width);
         right: 0;
-        top: 30px;
+        top: 60px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -257,6 +257,24 @@ $message-width: calc(100% / 2);
                 display: flex;
                 color: var(--bg-color-secondary);
             }
+        }
+    }
+}
+
+.notice-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+    .old-member,
+    .new-member {
+        font-weight: 500;
+        .avatar {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            margin-right: 6px;
+            box-shadow: var(--box-shadow);
         }
     }
 }

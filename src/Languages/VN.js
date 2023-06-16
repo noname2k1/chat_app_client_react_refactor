@@ -74,6 +74,11 @@ const VN = {
     tooltipAddImage: 'Thêm Hình Ảnh',
     tooltipAddVideo: 'Thêm Video',
     tooltipAddAudio: 'Thêm Đoạn Ghi Âm',
+    tooltipAddMember: 'Thêm Thành Viên',
+
+    //placeholders
+    addMemberPlaceholder: 'Nhập @+ID/tên của thành viên muốn thêm vào đây',
+
     //Room
     noRoom: 'Hiện bạn không có cuộc trò chuyện nào',
     newMessage: 'Soạn Tin Nhắn',
@@ -89,6 +94,8 @@ const VN = {
     noRequest: 'Không có yêu cầu nào',
     blockedNotify: 'Bạn đã bị chặn bởi ',
     blockerNotify: 'Bạn đã chặn ',
+    added: 'đã thêm',
+    outed: 'đã rời phòng',
     //dropdown
     myAccount: 'Tài Khoản Của Tôi',
     darkmode: 'Chế Độ Tối',

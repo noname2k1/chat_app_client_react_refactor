@@ -261,6 +261,38 @@ const Message = ({ loadingProp = false }) => {
                 gotoBottom();
             }
         });
+        socket.on('add-new-member', ({ receiverid, room_id, message }) => {
+            if (window.location.pathname.split('/')[3] === room_id) {
+                socket.emit(
+                    'view',
+                    window.location.pathname.split('/')[3],
+                    profile._id
+                );
+                dispatch(
+                    componentSlice.actions.setMessages([
+                        ...currentMessages,
+                        message,
+                    ])
+                );
+                gotoBottom();
+            }
+        });
+        socket.on('member-out-room', ({ roomid, message }) => {
+            if (window.location.pathname.split('/')[3] === roomid) {
+                socket.emit(
+                    'view',
+                    window.location.pathname.split('/')[3],
+                    profile._id
+                );
+                dispatch(
+                    componentSlice.actions.setMessages([
+                        ...currentMessages,
+                        message,
+                    ])
+                );
+                gotoBottom();
+            }
+        });
     }, [currentMessages]);
 
     if (currentRoom.mode === 'private' && currentRoom.blocked) {
@@ -279,6 +311,49 @@ const Message = ({ loadingProp = false }) => {
                     {loadMoreEffect && <LoadingFaceBook />}
                     {currentMessages.length > 0 &&
                         currentMessages.map((message, index) => {
+                            //notice message
+                            if (
+                                ['notice-add', 'notice-out'].indexOf(
+                                    message.purpose
+                                ) !== -1
+                            ) {
+                                return (
+                                    <div
+                                        className="notice-wrapper"
+                                        key={message._id}
+                                    >
+                                        <span className="old-member">
+                                            <img
+                                                src={message.sender.avatarlink}
+                                                alt={message.sender.name}
+                                                className="avatar"
+                                            />
+                                            {message.sender.name}
+                                        </span>
+                                        &nbsp;
+                                        {message.purpose === 'notice-add' &&
+                                            currentLanguage.added}
+                                        {message.purpose === 'notice-out' &&
+                                            currentLanguage.outed}
+                                        &nbsp;
+                                        {message.purpose === 'notice-add' && (
+                                            <span className="new-member">
+                                                <img
+                                                    src={
+                                                        message.reacter[0]
+                                                            .avatarlink
+                                                    }
+                                                    alt={
+                                                        message.reacter[0].name
+                                                    }
+                                                    className="avatar"
+                                                />
+                                                {message.reacter[0].name}
+                                            </span>
+                                        )}
+                                    </div>
+                                );
+                            }
                             //message of others
                             if (message.sender._id !== profile._id) {
                                 return (

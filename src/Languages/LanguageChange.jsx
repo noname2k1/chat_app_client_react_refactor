@@ -7,7 +7,6 @@ const LanguageChange = (e) => {
     const dispatch = useDispatch();
     const handleLanguageChange = (e) => {
         if (e.target.value === 'vn') {
-            window.localStorage.setItem('language', JSON.stringify(VN));
             dispatch(
                 languageSlice.actions.changeLanguage({
                     currentLanguage: VN,
@@ -15,7 +14,6 @@ const LanguageChange = (e) => {
             );
         }
         if (e.target.value === 'en') {
-            window.localStorage.setItem('language', JSON.stringify(EN));
             dispatch(
                 languageSlice.actions.changeLanguage({
                     currentLanguage: EN,
@@ -25,13 +23,13 @@ const LanguageChange = (e) => {
     };
     return (
         <select
-            name=''
-            id='language'
+            name=""
+            id="language"
             onChange={handleLanguageChange}
             defaultValue={currentLanguage?.languageCode}
         >
-            <option value='en'>{currentLanguage.english}</option>
-            <option value='vn'>{currentLanguage.vietnamese}</option>
+            <option value="en">{currentLanguage.english}</option>
+            <option value="vn">{currentLanguage.vietnamese}</option>
         </select>
     );
 };
