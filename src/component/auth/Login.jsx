@@ -114,6 +114,14 @@ const Login = () => {
             required: false,
         },
     ];
+
+    // socket.io
+    React.useEffect(() => {
+        socket.on('register', (data) => {
+            const { username, password } = data;
+            setData({ username, password });
+        });
+    }, []);
     return (
         <form className="auth-body-item login">
             {loginForm.map((formItem, index) => {
@@ -127,6 +135,7 @@ const Login = () => {
                         </label>
                         <div className="input-wrapper">
                             <input
+                                value={data[formItem.name]}
                                 type={formItem.type}
                                 name={formItem.name}
                                 id={formItem.id}

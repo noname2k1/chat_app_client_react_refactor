@@ -192,7 +192,7 @@ const Message = ({ loadingProp = false }) => {
     React.useEffect(() => {
         const gotoBottomTimer = setTimeout(() => {
             gotoBottom();
-        }, 700);
+        }, 1000);
         return () => {
             clearTimeout(gotoBottomTimer);
         };

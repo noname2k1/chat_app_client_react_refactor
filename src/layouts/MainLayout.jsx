@@ -84,7 +84,7 @@ function MainLayOut() {
             dispatch(authSlice.actions.updateSocketid(socket.id));
             dispatch(usersOnlineSlice.actions.update(subtractMe));
         });
-    }, []);
+    }, [profile]);
 
     React.useEffect(() => {
         if (window.location.pathname.indexOf('/rooms/room/') === -1) {

@@ -12,48 +12,64 @@ import CallContextProvider from './component/Call/callContext';
 import Error404 from './page/Error404';
 import { MainLayout } from './layouts';
 import { PersistGate } from 'redux-persist/integration/react';
+import { routes } from './config';
 
 const App = () => {
-  return (
-    <GlobalStyle>
-      <Router>
-        <Provider store={store}>
-          <PersistGate loading={null} persistor={persistor}>
-            <Routes>
-              <Route path="/auth" element={<Auth />}></Route>
-              <Route path="/" element={<MainLayout />}>
-                <Route index element={<Content />}></Route>
-                <Route path="new" element={<CreateMessage />}></Route>
-                <Route
-                  path="rooms/room/:roomid"
-                  element={
-                    <CallContextProvider>
-                      <Content />
-                    </CallContextProvider>
-                  }
-                ></Route>
-                <Route
-                  path="rooms/profile/:profileid"
-                  element={
-                    <CallContextProvider>
-                      <Content />
-                    </CallContextProvider>
-                  }
-                ></Route>
-                <Route path="rooms/no-room" element={<NoRoom />}></Route>
-                <Route path="profile">
-                  <Route path=":profileid" element={<Profile />}></Route>
-                  <Route index element={<Profile />}></Route>
-                </Route>
-              </Route>
-              <Route path="not-found" element={<Error404 />}></Route>
-              <Route path="*" element={<Error404 />}></Route>
-            </Routes>
-          </PersistGate>
-        </Provider>
-      </Router>
-    </GlobalStyle>
-  );
+    return (
+        <GlobalStyle>
+            <Router>
+                <Provider store={store}>
+                    <PersistGate loading={null} persistor={persistor}>
+                        <Routes>
+                            <Route
+                                path={routes.auth}
+                                element={<Auth />}
+                            ></Route>
+                            <Route path={routes.home} element={<MainLayout />}>
+                                <Route index element={<Content />}></Route>
+                                <Route
+                                    path="new"
+                                    element={<CreateMessage />}
+                                ></Route>
+                                <Route
+                                    path="rooms/room/:roomid"
+                                    element={
+                                        <CallContextProvider>
+                                            <Content />
+                                        </CallContextProvider>
+                                    }
+                                ></Route>
+                                <Route
+                                    path="rooms/profile/:profileid"
+                                    element={
+                                        <CallContextProvider>
+                                            <Content />
+                                        </CallContextProvider>
+                                    }
+                                ></Route>
+                                <Route
+                                    path="rooms/no-room"
+                                    element={<NoRoom />}
+                                ></Route>
+                                <Route path="profile">
+                                    <Route
+                                        path=":profileid"
+                                        element={<Profile />}
+                                    ></Route>
+                                    <Route index element={<Profile />}></Route>
+                                </Route>
+                            </Route>
+                            <Route
+                                path={routes.notFound}
+                                element={<Error404 />}
+                            ></Route>
+                            <Route path="*" element={<Error404 />}></Route>
+                        </Routes>
+                    </PersistGate>
+                </Provider>
+            </Router>
+        </GlobalStyle>
+    );
 };
 
 export default App;
