@@ -78,8 +78,9 @@ function MainLayOut() {
         //update users online
         socket.on('online', (usersOnls) => {
             // console.log('users online', usersOnl);
+            const users = [...usersOnls].filter((user) => user.profileid);
             dispatch(authSlice.actions.updateSocketid(socket.id));
-            dispatch(usersOnlineSlice.actions.update(usersOnls));
+            dispatch(usersOnlineSlice.actions.update(users));
         });
     }, [profile]);
 
