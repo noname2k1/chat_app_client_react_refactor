@@ -161,8 +161,8 @@ const Daskboard = () => {
     }, []);
 
     React.useEffect(() => {
-        console.log('rooms', rooms);
-        console.log('currentRoom', currentRoom);
+        // console.log('rooms', rooms);
+        // console.log('currentRoom', currentRoom);
         if (
             rooms.findIndex((room) => room._id === currentRoom._id) === -1 &&
             rooms.length > 0 &&
