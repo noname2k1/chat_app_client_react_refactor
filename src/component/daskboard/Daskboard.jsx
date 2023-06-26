@@ -314,12 +314,12 @@ const Daskboard = () => {
                 className="users-online-count"
                 style={{ textAlign: 'center', marginTop: '10px' }}
             >
-                {currentLanguage.usersonline} ({Number(usersOnline.length) + 1})
+                {currentLanguage.usersonline} ({Number(usersOnline.length)})
             </div>
             <div className="online-accounts">
                 {usersOnline.length > 0 &&
                     usersOnline.map((user) => {
-                        if (user._id !== profile._id) {
+                        if (user.profileid !== profile._id) {
                             return (
                                 <div
                                     key={user.socketid}
