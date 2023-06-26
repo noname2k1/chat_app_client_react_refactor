@@ -143,9 +143,15 @@ const Daskboard = () => {
     };
 
     const handleDeleteConversation = async () => {
-        console.log('delete conversation');
+        // console.log('delete conversation');
         try {
-            await patchRoom(profile._id, contextMenuID, '$push', 'deleted');
+            const room = await patchRoom(
+                profile._id,
+                contextMenuID,
+                '$push',
+                'deleted'
+            );
+            dispatch(componentSlice.actions.setCurrentRoom(room));
             loadRooms();
         } catch (error) {
             console.log(error);
@@ -163,25 +169,42 @@ const Daskboard = () => {
     React.useEffect(() => {
         // console.log('rooms', rooms);
         // console.log('currentRoom', currentRoom);
-        if (
-            rooms.findIndex((room) => room._id === currentRoom._id) === -1 &&
-            rooms.length > 0 &&
-            currentRoom.mode === 'private'
-        ) {
-            setRooms((prev) => [...prev, currentRoom]);
-        }
+        const addNewRoom = async () => {
+            if (
+                rooms.findIndex((room) => room._id === currentRoom._id) ===
+                    -1 &&
+                rooms.length > 0 &&
+                currentRoom.mode === 'private'
+            ) {
+                if (currentRoom.deleted.indexOf(profile._id) !== -1) {
+                    try {
+                        await patchRoom(
+                            profile._id,
+                            currentRoom._id,
+                            '$pull',
+                            'deleted'
+                        );
+                    } catch (error) {
+                        console.log(error);
+                    }
+                }
+                setRooms((prev) => [...prev, currentRoom]);
+            }
+        };
+        addNewRoom();
     }, [currentRoom]);
 
     React.useEffect(() => {
         if (
-            ((!roomid && !profileid) ||
+            (((!roomid && !profileid) ||
                 !currentRoom.member?.find((mem) => mem._id === profile._id)) &&
-            rooms.length > 0 &&
-            rooms[0]._id
+                rooms.length > 0 &&
+                rooms[0]._id) ||
+            currentRoom.deleted?.find((mem) => mem._id === profile._id)
         ) {
             navigate(`/rooms/room/${rooms[0]._id}`);
         }
-    }, [roomid, rooms, profileid]);
+    }, [roomid, rooms, profileid, currentRoom]);
 
     //socket.io
     React.useEffect(() => {

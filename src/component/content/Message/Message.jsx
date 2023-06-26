@@ -389,11 +389,11 @@ const Message = ({ loadingProp = false }) => {
                                                     <strong>
                                                         &nbsp;
                                                         {message.replymessageid
-                                                            .sender._id !==
+                                                            .sender?._id !==
                                                         profile._id
                                                             ? message
                                                                   .replymessageid
-                                                                  .sender.name
+                                                                  .sender?.name
                                                             : currentLanguage.yourSelf}
                                                     </strong>
                                                 </header>
@@ -404,7 +404,7 @@ const Message = ({ loadingProp = false }) => {
                                                     }
                                                     {message.replymessageid
                                                         .attachmentsLink
-                                                        .length > 0 &&
+                                                        ?.length > 0 &&
                                                         currentLanguage.attachments}
                                                 </div>
                                             </div>
