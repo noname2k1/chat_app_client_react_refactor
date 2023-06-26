@@ -161,6 +161,18 @@ const Daskboard = () => {
     }, []);
 
     React.useEffect(() => {
+        console.log('rooms', rooms);
+        console.log('currentRoom', currentRoom);
+        if (
+            rooms.findIndex((room) => room._id === currentRoom._id) === -1 &&
+            rooms.length > 0 &&
+            currentRoom.mode === 'private'
+        ) {
+            setRooms((prev) => [...prev, currentRoom]);
+        }
+    }, [currentRoom]);
+
+    React.useEffect(() => {
         if (
             ((!roomid && !profileid) ||
                 !currentRoom.member?.find((mem) => mem._id === profile._id)) &&
