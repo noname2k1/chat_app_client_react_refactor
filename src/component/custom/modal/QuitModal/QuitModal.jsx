@@ -16,6 +16,9 @@ const QuitModal = ({ visible, title, purpose, callback }) => {
             case 'leaveroom':
                 setModalText(currentLanguage.confirmLeaveRoom);
                 break;
+            case 'delete-conversation':
+                setModalText(currentLanguage.confirmDeleteConversation);
+                break;
             default:
                 break;
         }
@@ -43,6 +46,9 @@ const QuitModal = ({ visible, title, purpose, callback }) => {
             onCancel={handleCancel}
             okText={currentLanguage.okText}
             cancelText={currentLanguage.cancelText}
+            okButtonProps={{
+                danger: true,
+            }}
         >
             <p>{modalText}</p>
         </Modal>

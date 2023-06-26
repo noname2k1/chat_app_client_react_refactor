@@ -111,6 +111,7 @@ const VN = {
     muteNotification: 'Tắt Thông Báo',
     viewMediaFilesLinks: 'Xem Media, Files, Links',
     block: 'Chặn',
+    deleteConversation: 'Xóa Cuộc Trò Chuyện',
 
     //message
     typingText: 'đang nhập tin nhắn',
@@ -145,6 +146,7 @@ const VN = {
     //modal
     confirmLeaveRoom: 'Bạn có chắc chắn muốn rời khỏi phòng này?',
     confirmLogout: 'Bạn có chắc chắn muốn đăng xuất?',
+    confirmDeleteConversation: 'Bạn có chắc chắn muốn xóa cuộc trò chuyện này?',
     leavingRoom: 'Đang rời phòng...',
     loggingOut: 'Đang đăng xuất...',
     okText: 'OK',

@@ -24,7 +24,8 @@ import Loading from '../custom/loading/Loading';
 import { useDispatch } from 'react-redux';
 import { componentSlice } from '../redux/slices';
 import Tooltip from '../custom/tooltip/Tooltip';
-import { getMyRooms } from '~/services/roomService';
+import { getMyRooms, patchRoom } from '~/services/roomService';
+import QuitModal from '../custom/modal/QuitModal/QuitModal';
 const Daskboard = () => {
     const { profileid, roomid } = useParams();
     const dispatch = useDispatch();
@@ -40,6 +41,8 @@ const Daskboard = () => {
         mobileAccountsOnline,
     } = useComponentSelector();
     const [rooms, setRooms] = React.useState([]);
+    const [modal, setModal] = React.useState(false);
+    const [contextMenuID, setContextMenuID] = React.useState('');
     const [isLoading, setIsLoading] = React.useState(false);
 
     const loadRooms = async (loading = false, loadFirstRoom = false) => {
@@ -125,8 +128,36 @@ const Daskboard = () => {
         dispatch(componentSlice.actions.setMobileAccountsOnline(true));
     };
 
+    const handleContextMenu = (e, roomid) => {
+        e.preventDefault();
+        setContextMenuID(roomid);
+    };
+
+    const handleClickOutsideContextMenu = (e) => {
+        if (e.target.closest('.room-context-menu')) {
+            // console.log('click inside context menu');
+            return;
+        } else {
+            setContextMenuID('');
+        }
+    };
+
+    const handleDeleteConversation = async () => {
+        console.log('delete conversation');
+        try {
+            await patchRoom(profile._id, contextMenuID, '$push', 'deleted');
+            loadRooms();
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     React.useEffect(() => {
         loadRooms(true);
+        window.addEventListener('click', handleClickOutsideContextMenu);
+        return () => {
+            window.removeEventListener('click', handleClickOutsideContextMenu);
+        };
     }, []);
 
     React.useEffect(() => {
@@ -155,6 +186,9 @@ const Daskboard = () => {
                 loadRooms();
             }
         });
+        socket.on('load-list-of-rooms', () => {
+            loadRooms();
+        });
         socket.on('leave-room', (profileid) => {
             if (profile._id === profileid) {
                 loadRooms(false, true);
@@ -169,6 +203,7 @@ const Daskboard = () => {
             })}
         >
             {isLoading && <Loading />}
+            {/* Daskboard header */}
             <div className="daskboard-header">
                 <div className="my-user-container">
                     <Tooltip
@@ -256,6 +291,7 @@ const Daskboard = () => {
                     <MdOutlinePersonSearch size={25} />
                 </div>
             </Tooltip>
+            {/* search bar */}
             <div className="search-bar-wrapper">
                 <SearchBar
                     target="profile"
@@ -313,7 +349,13 @@ const Daskboard = () => {
             >
                 {rooms.length > 0 &&
                     rooms.map((room) => (
-                        <li className="room-item" key={room._id}>
+                        <li
+                            className="room-item"
+                            key={room._id}
+                            onContextMenu={(e) =>
+                                handleContextMenu(e, room._id)
+                            }
+                        >
                             <Link
                                 to={`rooms/room/${room._id}`}
                                 className={clsx('room-link', {
@@ -358,12 +400,31 @@ const Daskboard = () => {
                                     )}
                                 </div>
                             </Link>
+                            {room.mode === 'private' && (
+                                <ul
+                                    className={clsx('room-context-menu', {
+                                        show: contextMenuID === room._id,
+                                    })}
+                                >
+                                    <li onClick={() => setModal(true)}>
+                                        {currentLanguage.deleteConversation}
+                                    </li>
+                                </ul>
+                            )}
                         </li>
                     ))}
                 {rooms.length === 0 && (
                     <span className="no-room">{currentLanguage.noRoom}</span>
                 )}
             </ul>
+            {modal && (
+                <QuitModal
+                    visible={{ modal, setModal }}
+                    title={currentLanguage.deleteConversation}
+                    purpose="delete-conversation"
+                    callback={handleDeleteConversation}
+                />
+            )}
         </aside>
     );
 };

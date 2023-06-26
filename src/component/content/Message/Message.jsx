@@ -189,12 +189,18 @@ const Message = ({ loadingProp = false }) => {
         dispatch(componentSlice.actions.setPage(0));
     }, [selectedRoomid]);
 
+    const hideContextMenu = (e) => {
+        setContextid('');
+    };
+
     React.useEffect(() => {
         const gotoBottomTimer = setTimeout(() => {
             gotoBottom();
         }, 1000);
+        window.addEventListener('click', hideContextMenu);
         return () => {
             clearTimeout(gotoBottomTimer);
+            window.removeEventListener('click', hideContextMenu);
         };
     }, [selectedRoomid, messagesContainerRef.current]);
 

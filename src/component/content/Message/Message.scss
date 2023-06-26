@@ -42,7 +42,7 @@ $message-width: calc(100% / 2);
                 color: var(--text-color);
             }
             &.liked {
-                color: var(--purple-color);
+                color: var(--heart-color);
             }
         }
         .options-item-separate {
@@ -124,11 +124,11 @@ $message-width: calc(100% / 2);
                     text-overflow: ellipsis;
                     overflow: hidden;
                     white-space: nowrap;
-                    font-weight: bold;
-                    font-size: 1.7rem;
+                    font-weight: 900;
+                    font-size: 1.8rem;
                     margin-bottom: 5px;
                 }
-                padding: 6px 10px;
+                padding: 6px 14px;
                 border-radius: 20px;
                 max-width: $message-width;
                 .message-is-replied {

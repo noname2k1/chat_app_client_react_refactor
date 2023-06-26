@@ -111,6 +111,7 @@ const EN = {
     muteNotification: 'Mute Notification',
     viewMediaFilesLinks: 'View Media, Files & Links',
     block: 'Block',
+    deleteConversation: 'Delete Conversation',
     //message
     typingText: 'is typing',
     send: 'Send',
@@ -145,6 +146,8 @@ const EN = {
     //modal
     confirmLeaveRoom: 'Are you sure you want to leave this room?',
     confirmLogout: 'Are you sure you want to logout?',
+    confirmDeleteConversation:
+        'Are you sure you want to delete this conversation?',
     leavingRoom: 'Leaving room...',
     loggingOut: 'Logging out...',
     okText: 'OK',

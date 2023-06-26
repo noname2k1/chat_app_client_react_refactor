@@ -242,6 +242,36 @@
     }
 }
 
+.room-item {
+    position: relative;
+    .room-context-menu {
+        border-radius: 6px;
+        padding: 10px 0;
+        list-style: none;
+        position: absolute;
+        visibility: hidden;
+        opacity: 0;
+        transition: all 0.2s ease-in-out;
+        z-index: 1;
+        top: 0;
+        left: 100%;
+        box-shadow: var(--box-shadow);
+        &.show {
+            visibility: visible;
+            opacity: 1;
+        }
+        li {
+            padding: 10px;
+            cursor: pointer;
+            white-space: nowrap;
+            &:hover {
+                background-color: var(--active-hover-color);
+                font-weight: 600;
+            }
+        }
+    }
+}
+
 @media screen and (max-width: 768px) {
     .daskboard {
         position: fixed;

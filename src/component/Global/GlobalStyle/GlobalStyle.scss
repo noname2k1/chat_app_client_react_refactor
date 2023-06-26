@@ -43,8 +43,9 @@
     --text-color-secondary: #f1f2f3;
     --loading-bg: #000;
     --mode-icon-bg: rgb(255, 200, 0);
-    --other-message-bg: #6e6e6e2e;
+    --other-message-bg: #5c5c5c52;
     --my-message-bg: #593cff;
+    --heart-color: #8200ce;
     --message-hidden-color: #8f8f8f;
     //color
     --yellow-color: #fde047;
@@ -149,3 +150,9 @@ button {
 }
 
 //dropdown css: z-index: 999, overlay: z-index: 998
+
+// overide modal antd
+.ant-modal-mask,
+.ant-modal-wrap {
+    z-index: 10000;
+}
