@@ -318,29 +318,37 @@ const Daskboard = () => {
             </div>
             <div className="online-accounts">
                 {usersOnline.length > 0 &&
-                    usersOnline.map((user) => (
-                        <div
-                            key={user.socketid}
-                            onClick={() => handleClickOthers(user.profileid)}
-                            style={{
-                                cursor: 'pointer',
-                                color: 'var(--blue-color)',
-                            }}
-                        >
-                            <span className="online-account">
-                                <div className="account-avatar">
-                                    <img
-                                        src={user.avatar}
-                                        alt="acc-avatar"
-                                        className="account-avatar__img"
-                                        width="100%"
-                                        height="100%"
-                                    />
+                    usersOnline.map((user) => {
+                        if (user._id !== profile._id) {
+                            return (
+                                <div
+                                    key={user.socketid}
+                                    onClick={() =>
+                                        handleClickOthers(user.profileid)
+                                    }
+                                    style={{
+                                        cursor: 'pointer',
+                                        color: 'var(--blue-color)',
+                                    }}
+                                >
+                                    <span className="online-account">
+                                        <div className="account-avatar">
+                                            <img
+                                                src={user.avatar}
+                                                alt="acc-avatar"
+                                                className="account-avatar__img"
+                                                width="100%"
+                                                height="100%"
+                                            />
+                                        </div>
+                                        <div className="account-name">
+                                            {user.name}
+                                        </div>
+                                    </span>
                                 </div>
-                                <div className="account-name">{user.name}</div>
-                            </span>
-                        </div>
-                    ))}
+                            );
+                        }
+                    })}
             </div>
             {/* Room - LIST */}
             <ul
