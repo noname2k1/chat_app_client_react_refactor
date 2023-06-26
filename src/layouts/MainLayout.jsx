@@ -76,13 +76,10 @@ function MainLayOut() {
             name: profile.name,
         });
         //update users online
-        socket.on('online', (usersOnl) => {
+        socket.on('online', (usersOnls) => {
             // console.log('users online', usersOnl);
-            const subtractMe = usersOnl.filter(
-                (user) => user.profileid !== profile._id
-            );
             dispatch(authSlice.actions.updateSocketid(socket.id));
-            dispatch(usersOnlineSlice.actions.update(subtractMe));
+            dispatch(usersOnlineSlice.actions.update(usersOnls));
         });
     }, [profile]);
 
