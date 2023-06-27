@@ -157,9 +157,15 @@ const MessageForm = () => {
             });
             axios.all(results).then((results) => {
                 const listItemUploadedLink = results.map((result) => {
+                    // console.log(result);
+                    let aspectRatio = '1/1';
+                    if (result.resource_type === 'image') {
+                        aspectRatio = `${result.width}/${result.height}`;
+                    }
                     return {
                         link: result.secure_url,
                         type: result.resource_type,
+                        aspectRatio,
                     };
                 });
                 if (listItemUploadedLink.length > 0) {
