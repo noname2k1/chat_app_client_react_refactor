@@ -52,6 +52,7 @@ const Room = ({ closeBox }) => {
                 if (data.status === 'success') {
                     setString('');
                     navigate(`/rooms/room/${data.room._id}`);
+                    socket.emit('create-room', data.room._id);
                 }
             } catch (error) {
                 // console.log(error);

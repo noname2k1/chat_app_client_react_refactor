@@ -211,6 +211,9 @@ const Daskboard = () => {
         socket.on('connect', () => {
             socket.emit('join', rooms);
         });
+        socket.on('create-room', () => {
+            loadRooms();
+        });
         socket.on('add-new-member', ({ receiverid, room_id, message }) => {
             if (profile._id === receiverid) {
                 loadRooms();

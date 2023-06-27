@@ -9,7 +9,7 @@ import { validateFormInput, removeValidateError } from './validateFormInput';
 import { register } from '~/services/authService';
 import socket from '~/tools/socket.io';
 
-const Register = () => {
+const Register = ({ setToast }) => {
     const [searchParams, setSearchParams] = useSearchParams({});
 
     const [isErrorPattern, setIsErrorPattern] = React.useState({
@@ -44,6 +44,10 @@ const Register = () => {
         try {
             await register(data);
             socket.emit('register', data);
+            setToast({
+                show: true,
+                message: 'Register successfully! Please login to continue!',
+            });
             setSearchParams({ target: 'login' });
         } catch (error) {
             // console.log(error);

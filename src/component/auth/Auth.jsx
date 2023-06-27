@@ -29,14 +29,7 @@ const Auth = () => {
         }
     }, [target]);
     // socket.io
-    React.useEffect(() => {
-        socket.on('register', (data) => {
-            setToast({
-                show: true,
-                message: 'Register successfully! Please login to continue!',
-            });
-        });
-    }, []);
+
     if (isAuthenticated && token) {
         return <Navigate to="/" />;
     }
@@ -63,7 +56,7 @@ const Auth = () => {
                 </div>
                 <div className="auth-body">
                     {target === 'login' && <Login />}
-                    {target === 'register' && <Register />}
+                    {target === 'register' && <Register setToast={setToast} />}
                     {target === 'login' && (
                         <div className="match-word">
                             <hr />

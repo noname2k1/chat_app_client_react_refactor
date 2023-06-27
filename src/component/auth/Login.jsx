@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { authSlice } from '../redux/slices';
 import { useLanguageSelector } from '~/component/redux/selector';
@@ -10,6 +10,7 @@ import { login } from '~/services/authService';
 import socket from '~/tools/socket.io';
 import { withTokenInstance } from '~/tools/instances/withTokenInstance';
 const Login = () => {
+    const [searchParams, setSearchParams] = useSearchParams({});
     const [isErrorPattern, setIsErrorPattern] = React.useState({
         username: false,
         password: false,
@@ -119,9 +120,10 @@ const Login = () => {
     React.useEffect(() => {
         socket.on('register', (data) => {
             const { username, password } = data;
+            console.log(username, password);
             setData({ username, password });
         });
-    }, []);
+    }, [searchParams]);
     return (
         <form className="auth-body-item login">
             {loginForm.map((formItem, index) => {
