@@ -117,7 +117,9 @@ const ZoomFile = () => {
                                               ].aspectRatio
                                           }`,
                                       }
-                                    : {}
+                                    : {
+                                          aspectRatio: `1/1`,
+                                      }
                             }
                         >
                             {viewFileModal.files[viewFileModal.currentIndex]
@@ -167,7 +169,9 @@ const ZoomFile = () => {
                                             ? {
                                                   aspectRatio: `${item.aspectRatio}`,
                                               }
-                                            : {}
+                                            : {
+                                                  aspectRatio: `1/1`,
+                                              }
                                     }
                                     key={index}
                                     onClick={(e) => handleSelectItem(e, index)}
