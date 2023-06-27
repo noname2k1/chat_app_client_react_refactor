@@ -103,7 +103,23 @@ const ZoomFile = () => {
                         </ul>
                     </header>
                     <main className="main">
-                        <div className="main-item">
+                        <div
+                            className="main-item"
+                            style={
+                                viewFileModal.files[viewFileModal.currentIndex]
+                                    .type === 'image' &&
+                                viewFileModal.files[viewFileModal.currentIndex]
+                                    .aspectRatio
+                                    ? {
+                                          aspectRatio: `${
+                                              viewFileModal.files[
+                                                  viewFileModal.currentIndex
+                                              ].aspectRatio
+                                          }`,
+                                      }
+                                    : {}
+                            }
+                        >
                             {viewFileModal.files[viewFileModal.currentIndex]
                                 .type === 'image' && (
                                 <img
@@ -145,6 +161,14 @@ const ZoomFile = () => {
                                             index ===
                                             viewFileModal.currentIndex,
                                     })}
+                                    style={
+                                        item.type === 'image' &&
+                                        item.aspectRatio
+                                            ? {
+                                                  aspectRatio: `${item.aspectRatio}`,
+                                              }
+                                            : {}
+                                    }
                                     key={index}
                                     onClick={(e) => handleSelectItem(e, index)}
                                     ref={

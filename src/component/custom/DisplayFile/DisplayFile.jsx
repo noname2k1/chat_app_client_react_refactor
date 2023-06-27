@@ -38,7 +38,7 @@ const DisplayMedia = ({ item, link }) => {
             dispatch(
                 componentSlice.actions.setViewFileModal({
                     enable: true,
-                    currentIndex: 0,
+                    currentIndex: viewFileModal.files.length,
                     files: [...viewFileModal.files, item],
                 })
             );
