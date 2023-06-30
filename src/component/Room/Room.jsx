@@ -8,7 +8,7 @@ import {
     useLanguageSelector,
     useAuthSelector,
 } from '~/component/redux/selector';
-import { getRooms, patchRoom } from '~/services/roomService';
+import { getRooms, getSuggestRooms, patchRoom } from '~/services/roomService';
 import socket from '~/tools/socket.io';
 import { createRoom } from '~/services/roomService';
 
@@ -21,6 +21,19 @@ const Room = ({ closeBox }) => {
     const [error, setError] = React.useState('');
     const [string, setString] = React.useState('');
     const [rooms, setRooms] = React.useState([]);
+
+    const getSuggestion = async () => {
+        try {
+            const res = await getSuggestRooms();
+            // console.log(res);
+            if (res.rooms.length) {
+                setRooms(res.rooms);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     const switchTabName = (e) => {
         if (e.target.classList.contains('active')) {
             return;
@@ -37,13 +50,7 @@ const Room = ({ closeBox }) => {
             e.target.classList.toggle('active', tabName === 'createRoom');
         }
     };
-    React.useEffect(() => {
-        const input = document.querySelector('.room-item__input');
-        if (input) {
-            input.value = '';
-            input.focus();
-        }
-    }, [tabName]);
+
     const handleButtonClick = async (e) => {
         e.preventDefault();
         if (tabName === 'createRoom') {
@@ -52,6 +59,7 @@ const Room = ({ closeBox }) => {
                 if (data.status === 'success') {
                     setString('');
                     navigate(`/rooms/room/${data.room._id}`);
+                    closeBox();
                     socket.emit('create-room', data.room._id);
                 }
             } catch (error) {
@@ -76,7 +84,7 @@ const Room = ({ closeBox }) => {
         }
     };
     const handleSummit = (value) => {
-        if (tabName === 'findRoom') {
+        if (tabName === 'findRoom' && value) {
             findResults(value);
         }
     };
@@ -127,12 +135,27 @@ const Room = ({ closeBox }) => {
         }
         socket.emit('request', e.target.dataset.roomid);
     };
+
+    React.useEffect(() => {
+        if (!rooms.length || !string) {
+            getSuggestion();
+        }
+    }, [string, rooms.length]);
+
+    React.useEffect(() => {
+        const input = document.querySelector('.room-item__input');
+        if (input) {
+            input.value = '';
+            input.focus();
+        }
+    }, [tabName]);
     //Socket.io
     React.useEffect(() => {
         socket.on('notification-join-room-success', (profileid) => {
             if (profile._id === profileid) {
                 if (inputRef.current) {
                     handleSummit(inputRef.current.value);
+                    getSuggestion();
                 }
             }
         });
@@ -140,6 +163,7 @@ const Room = ({ closeBox }) => {
             if (profile._id === profileId) {
                 if (inputRef.current) {
                     handleSummit(inputRef.current.value);
+                    getSuggestion();
                 }
             }
         });

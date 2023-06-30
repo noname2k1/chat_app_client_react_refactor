@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { authSlice } from '~/component/redux/slices';
 import { useLanguageSelector } from '~/component/redux/selector';
 import { updateProfile } from '~/services/profileService';
+import socket from '~/tools/socket.io';
 const TypeName = () => {
     const dispatch = useDispatch();
     const [name, setName] = React.useState('');
@@ -19,11 +20,12 @@ const TypeName = () => {
             buttonNode.disabled = false;
         }
     }, [name]);
-    const changeName = async (e) => {
+    const handlechangeName = async (e) => {
         e.preventDefault();
         const data = await updateProfile({ name });
         // console.log(data);
         if (data.status === 'success') {
+            socket.emit('change-display-name', { name });
             alert(currentLanguage.changenamesuccess);
             dispatch(authSlice.actions.changeProfile(data.profile));
         }
@@ -45,7 +47,10 @@ const TypeName = () => {
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                     />
-                    <button className="type-name__button" onClick={changeName}>
+                    <button
+                        className="type-name__button"
+                        onClick={handlechangeName}
+                    >
                         {currentLanguage.ok}
                     </button>
                 </form>

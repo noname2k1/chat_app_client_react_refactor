@@ -7,9 +7,10 @@ import {
     MdOutlineContentCopy,
     MdOutlineCheckCircleOutline,
     MdOutlinePersonSearch,
+    MdClose,
 } from 'react-icons/md';
 import { BsFillPersonLinesFill } from 'react-icons/bs';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import AccountDropDown from '~/component/dropdown/AccountDropDown/AccountDropDown';
 import {
     useAuthSelector,
@@ -26,8 +27,10 @@ import { componentSlice } from '../redux/slices';
 import Tooltip from '../custom/tooltip/Tooltip';
 import { getMyRooms, patchRoom } from '~/services/roomService';
 import QuitModal from '../custom/modal/QuitModal/QuitModal';
+import { routes } from '~/config';
 const Daskboard = () => {
     const { profileid, roomid } = useParams();
+    const { pathname } = useLocation();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const profile = useAuthSelector().profile;
@@ -196,11 +199,12 @@ const Daskboard = () => {
 
     React.useEffect(() => {
         if (
-            (((!roomid && !profileid) ||
+            ((((!roomid && !profileid) ||
                 !currentRoom.member?.find((mem) => mem._id === profile._id)) &&
                 rooms.length > 0 &&
                 rooms[0]._id) ||
-            currentRoom.deleted?.find((mem) => mem._id === profile._id)
+                currentRoom.deleted?.find((mem) => mem._id === profile._id)) &&
+            [routes.profile, routes.new].indexOf(pathname) === -1
         ) {
             navigate(`/rooms/room/${rooms[0]._id}`);
         }
@@ -391,7 +395,7 @@ const Daskboard = () => {
             {/* Room - LIST */}
             <ul
                 className="room-list"
-                style={{ overflowY: rooms.length === 0 ? 'hidden' : 'visible' }}
+                style={{ overflowY: rooms.length === 0 ? 'hidden' : 'auto' }}
             >
                 {rooms.length > 0 &&
                     rooms.map((room) => (
@@ -453,7 +457,12 @@ const Daskboard = () => {
                                     })}
                                 >
                                     <li onClick={() => setModal(true)}>
-                                        {currentLanguage.deleteConversation}
+                                        <span className="icon">
+                                            <MdClose />
+                                        </span>
+                                        <span className="text">
+                                            {currentLanguage.deleteConversation}
+                                        </span>
                                     </li>
                                 </ul>
                             )}

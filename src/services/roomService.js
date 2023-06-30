@@ -1,4 +1,16 @@
 import { withTokenInstance } from '~/tools/instances/withTokenInstance';
+
+const getSuggestRooms = async () => {
+    try {
+        const res = await withTokenInstance.get(
+            `${import.meta.env.VITE_CHAT_SERVER_URL}/api/chat/room`
+        );
+        return res.data;
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+};
 // get my rooms
 const getMyRooms = async () => {
     try {
@@ -18,7 +30,7 @@ const getRooms = async (room_string) => {
         const res = await withTokenInstance.get(
             `${
                 import.meta.env.VITE_CHAT_SERVER_URL
-            }/api/chat/room?string=${room_string}`
+            }/api/chat/room/search?string=${room_string}`
         );
         return res.data;
     } catch (error) {
@@ -32,7 +44,7 @@ const getRoomsByName = async (search_string) => {
         const res = await withTokenInstance.get(
             `${
                 import.meta.env.VITE_CHAT_SERVER_URL
-            }/api/chat/room/search?search_string=${search_string}`
+            }/api/chat/room/search-by-name?search_string=${search_string}`
         );
         return res.data;
     } catch (error) {
@@ -123,6 +135,7 @@ const changeRoomBackground = async (roomid, colorid) => {
 };
 
 export {
+    getSuggestRooms,
     getMyRooms,
     patchRoom,
     getRooms,

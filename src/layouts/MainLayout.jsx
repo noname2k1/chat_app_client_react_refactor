@@ -5,6 +5,7 @@ import TypeName from '~/component/auth/TypeName/TypeName';
 import {
     useAuthSelector,
     useComponentSelector,
+    useUsersOnlineSelector,
 } from '~/component/redux/selector';
 import {
     authSlice,
@@ -27,6 +28,7 @@ import { getUserThroughToken } from '~/tools/callApi';
 
 function MainLayOut() {
     const { isAuthenticated, profile } = useAuthSelector();
+    // const { usersOnline } = useUsersOnlineSelector();
     const {
         mobileSearchBar,
         mobileAccountsOnline,
@@ -49,8 +51,8 @@ function MainLayOut() {
             const loadUser = async () => {
                 // console.log('load user', token);
                 // withTokenInstance.defaults.headers.authorization = 'Bearer ' + token;
-                const user = await getUserThroughToken();
-                if (user.status === 'success') {
+                try {
+                    const user = await getUserThroughToken();
                     dispatch(
                         authSlice.actions.login({
                             profile: user.profile,
@@ -58,8 +60,8 @@ function MainLayOut() {
                             token: user.token,
                         })
                     );
-                } else {
-                    console.log(user?.message);
+                } catch (error) {
+                    console.log(error);
                     navigate('/auth', { replace: true });
                 }
             };
@@ -77,7 +79,7 @@ function MainLayOut() {
         });
         //update users online
         socket.on('online', (usersOnls) => {
-            // console.log('users online', usersOnl);
+            // console.log('users online', usersOnls);
             const users = [...usersOnls].filter((user) => user.profileid);
             dispatch(authSlice.actions.updateSocketid(socket.id));
             dispatch(usersOnlineSlice.actions.update(users));
@@ -99,7 +101,7 @@ function MainLayOut() {
                 <Outlet />
             </ProtectedRoute>
             <ViewMediasFilesLinks />
-            {isAuthenticated && !profile.name && <TypeName />}
+            {isAuthenticated && !profile?.name && <TypeName />}
             {mobileSearchBar && <MobileSearchBar />}
             {mobileAccountsOnline && <MobileAccountsOnline />}
             {comingSoon && <ComingSoon />}
