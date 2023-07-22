@@ -9,7 +9,10 @@ import { validateFormInput, removeValidateError } from './validateFormInput';
 import { login } from '~/services/authService';
 import socket from '~/tools/socket.io';
 import { withTokenInstance } from '~/tools/instances/withTokenInstance';
+import SmallLoading from '../custom/loading/SmallLoading';
+
 const Login = () => {
+    const [isPending, setIsPending] = React.useState(false);
     const [searchParams, setSearchParams] = useSearchParams({});
     const [isErrorPattern, setIsErrorPattern] = React.useState({
         username: false,
@@ -36,6 +39,7 @@ const Login = () => {
     });
     const handleLogin = async (e) => {
         e.preventDefault();
+        setIsPending(true);
         try {
             socket.connect();
             const user = await login(data);
@@ -56,6 +60,8 @@ const Login = () => {
             } else if (currentLanguage.languageCode === 'vn') {
                 setError(error.data?.messagevn);
             }
+        } finally {
+            setIsPending(false);
         }
     };
 
@@ -209,7 +215,13 @@ const Login = () => {
                 onClick={handleLogin}
                 disabled={disabled}
             >
-                {currentLanguage?.loginButton}
+                <span>
+                    {!isPending ? (
+                        currentLanguage?.loginButton
+                    ) : (
+                        <SmallLoading />
+                    )}
+                </span>
             </button>
             {error && <div className="error-message-after-submit">{error}</div>}
             <div className="navigate">

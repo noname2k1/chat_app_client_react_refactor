@@ -136,6 +136,9 @@ $auth-footer-height: calc(100% - $auth-header-height - $auth-body-height);
                     font-size: 1.6rem;
                     font-weight: 600;
                     margin-top: 4px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
                     color: var(--text-color);
                     &:hover {
                         background-color: blue;
@@ -192,5 +195,11 @@ $auth-footer-height: calc(100% - $auth-header-height - $auth-body-height);
                 }
             }
         }
+    }
+}
+
+.auth-button {
+    span {
+        height: 20px;
     }
 }

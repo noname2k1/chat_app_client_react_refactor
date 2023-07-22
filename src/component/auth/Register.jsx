@@ -8,8 +8,10 @@ import { BsEye, BsEyeSlash } from 'react-icons/bs';
 import { validateFormInput, removeValidateError } from './validateFormInput';
 import { register } from '~/services/authService';
 import socket from '~/tools/socket.io';
+import SmallLoading from '../custom/loading/SmallLoading';
 
 const Register = ({ setToast }) => {
+    const [isPending, setIsPending] = React.useState(false);
     const [searchParams, setSearchParams] = useSearchParams({});
 
     const [isErrorPattern, setIsErrorPattern] = React.useState({
@@ -41,6 +43,7 @@ const Register = ({ setToast }) => {
     };
     const handleRegister = async (e) => {
         e.preventDefault();
+        setIsPending(true);
         try {
             await register(data);
             socket.emit('register', data);
@@ -57,6 +60,8 @@ const Register = ({ setToast }) => {
             } else if (currentLanguage.languageCode === 'vn') {
                 return setError(res.messagevn);
             }
+        } finally {
+            setIsPending(false);
         }
     };
     const currentLanguage = useLanguageSelector().currentLanguage;
@@ -206,7 +211,13 @@ const Register = ({ setToast }) => {
                 onClick={handleRegister}
                 disabled={disabled}
             >
-                {currentLanguage.registerButton}
+                <span>
+                    {isPending ? (
+                        <SmallLoading />
+                    ) : (
+                        currentLanguage?.registerButton
+                    )}
+                </span>
             </button>
             {error && <div className="error-message-after-submit">{error}</div>}
         </form>
